@@ -1,5 +1,14 @@
-let humanScore = 0;
-let computerScore = 0;
+let humanScore = document.getElementById("user_score") ;
+let computerScore = document.getElementById("comp_score");
+let uchoice= document.getElementById("user_choice");
+let cchoice= document.getElementById("comp_choice");
+let winner = document.getElementById("winner_txt");
+
+let humanSelection;
+let computerSelection;
+humanScore.textContent=0;
+computerScore.textContent=0;
+
 
 function getComputerChoice() {
 
@@ -7,69 +16,110 @@ function getComputerChoice() {
     return ary[Math.floor(Math.random() * 3)];
 }
 
-function getHumanChoice() {
-    return (prompt("whats u gonna choose nigga").toLocaleLowerCase());
+
+
+
+
+function rock (){
+    humanSelection="rock";
+    playRound();
+    return humanSelection;
+}
+
+function paper ()  {
+    humanSelection="paper";
+    playRound();
+    return humanSelection;
+}
+
+function scissor () {
+    humanSelection="scissor";
+    playRound();
+    return humanSelection;
 }
 
 
-let humanSelection;
-let computerSelection;
 
 function playRound() {
 
-    let humanSelection = getHumanChoice();
+   
     let computerSelection = getComputerChoice();
-    console.log(" user chooses " +humanSelection);
-    console.log("computer chooses " +computerSelection);
+    uchoice.textContent=(" user chooses " + humanSelection);
+    cchoice.textContent=("computer chooses " + computerSelection);
 
 
 
     if (humanSelection == computerSelection) {
-        console.log("its a draw mff!");
+        // choice.textContent=("its a draw mff!");
 
     }
     else if (humanSelection != computerSelection) {
         if (humanSelection == "rock") {
             if (computerSelection == "paper") {
-                computerScore++;
+                computerScore.textContent++;
 
             }
             else if (computerSelection == "scissor") {
-                humanScore++;
+                humanScore.textContent++;
             }
 
         }
 
         else if (humanSelection == "paper") {
             if (computerSelection == "rock") {
-                humanScore++;
+                humanScore.textContent++;
 
             }
             else if (computerSelection == "scissor") {
-                computerScore++;
+                computerScore.textContent++;
             }
         }
 
         else if (humanSelection == "scissor") {
             if (computerSelection == "rock") {
-                computerScore++;
+                computerScore.textContent++;
             }
             else if (computerSelection == "paper") {
-                humanScore++
+                humanScore.textContent++
             }
         }
     }
-
+check_winner();
+    
 }
 
-function playGame() {
-    for (let i = 0; i < 5; i++) {
-
-        playRound(humanSelection, computerSelection);
-
+function check_winner() {
+    if (humanScore.textContent==5) {
+        winner.textContent="user wins";
+    stop_game();
+    }
+    
+ else if (computerScore.textContent==5) {
+        winner.textContent="comp wins";
+        stop_game();
     }
 
+    
 }
-playGame(); 
-console.log("computer score "+computerScore);
-console.log("user score " +humanScore);
+
+function stop_game() {
+    let buttons =document.getElementsByClassName("buttons");
+    for (let i = 0; i < buttons.length; i++) {
+        
+        buttons[i].disabled=true;
+    }
+    
+}
+
+
+
+// function playGame() {
+//     for (let i = 0; i < 5; i++) {
+
+//         playRound(humanSelection, computerSelection);
+
+//     }
+    
+// }
+
+
